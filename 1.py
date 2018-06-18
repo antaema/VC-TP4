@@ -20,15 +20,14 @@ kernelX = np.array([[-1, 1],
 kernelY = np.array([[-1,-1],
                      [ 1, 1]]) * .25 #kernel for computing d/dy
 
-HSKERN2 =np.array([[1/12, 1/6, 1/12],
-                  [1/6,    0, 1/6], 
-                  [1/12, 1/6, 1/12]],float) * 2
+HSKERN2 = np.array([[-1, -1],
+                     [-1, -1]]) * .25 
 
 kernelX2 = np.array([[-1, 1],
-                     [-1, 1]]) * .4 #kernel for computing d/dx
+                     [-1, 1]]) * .3 #kernel for computing d/dx
 
 kernelY2 = np.array([[-1,-1],
-                     [ 1, 1]]) * .4 #kernel for computing d/dy
+                     [ 1, 1]]) * .3 #kernel for computing d/dy
 
 kernelT = np.ones((2,2))*.25
 kernelT2 = np.ones((2,2))*.5
@@ -75,7 +74,7 @@ def compareGraphs(u,v,Inew,title, scale:int=.4, quivstep:int=6):
     shape = u.shape
     for i in range(0,shape[0], quivstep):
         for j in range(0,shape[1], quivstep):
-            if abs(v[i,j] - u[i,j]) > 3:
+            if abs(v[i,j]) > 3 or abs(u[i,j]) > 3:
                 ax.arrow(j,i, v[i,j]*scale, u[i,j]*scale, color='green',head_width=4, head_length=6)
 
     draw();pause(0.01)
